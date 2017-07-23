@@ -29,7 +29,7 @@
         function UpdateData() {
             hubProxy.server.notifyClients(updatedFlags);
             $('[id^=txt]').attr("isChange", false)
-              = [];
+            updatedFlags= [];
         }
 
         var updatedFlags = [];
