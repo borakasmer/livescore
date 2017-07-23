@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore", "LiveScore\LiveScore.csproj", "{3CF73F01-868E-414D-808D-5EDA030255C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSync", "SqlSync\SqlSync.csproj", "{BE8606F7-5588-4DE7-8171-6030EE35BD4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{E2D331F5-5DBA-4F5B-8E7C-25BD223FC789}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF73F01-868E-414D-808D-5EDA030255C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF73F01-868E-414D-808D-5EDA030255C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF73F01-868E-414D-808D-5EDA030255C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF73F01-868E-414D-808D-5EDA030255C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8606F7-5588-4DE7-8171-6030EE35BD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8606F7-5588-4DE7-8171-6030EE35BD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8606F7-5588-4DE7-8171-6030EE35BD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8606F7-5588-4DE7-8171-6030EE35BD4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2D331F5-5DBA-4F5B-8E7C-25BD223FC789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D331F5-5DBA-4F5B-8E7C-25BD223FC789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D331F5-5DBA-4F5B-8E7C-25BD223FC789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D331F5-5DBA-4F5B-8E7C-25BD223FC789}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

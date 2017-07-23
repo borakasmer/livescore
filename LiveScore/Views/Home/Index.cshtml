@@ -1,0 +1,88 @@
+﻿@using LiveScore.Models
+@model List<MatchData>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <link href="~/Content/flag.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>        
+        <script src="~/signalr/hubs"></script>
+        <script>
+            var hubProxy = $.connection.match;
+            $.connection.hub.logging = true;
+
+            $.connection.hub.start().done(function () {
+                console.log("hub.start.done");
+            }).fail(function (error) {
+                console.log(error);
+            });
+
+            hubProxy.client.updateScore = function (datas)
+            {
+                console.log(JSON.stringify(datas));
+                $('[id^=txt]').css("background-color", "white");
+                for (var i = 0; i < datas.length; i++)
+                {                  
+                    var id = datas[i].ID
+                    $("#" + id).slideUp(300).css("background-color", "skyblue").fadeIn(2000);
+                    window.setTimeout(function () {                       
+                    }, 4000);                  
+                    $("#" + datas[i].ID).text(datas[i].Score);                  
+
+                    console.log(id);
+                };
+
+            }
+
+            //hubProxy.client.notifyConnect = function (message) {               
+            //    console.log(message);
+            //};        
+
+            //function change() {
+            //    $("#tblspritesFB").slideUp(300).css("background-color", "skyblue").fadeIn(2000);
+
+            //    window.setTimeout(function () {
+            //        $("#tblspritesFB").hide().css("background-color", "").fadeIn(2000);
+            //    }, 5000);
+
+            //    $("#spritesFB").text(3);
+            //    $("#spritesGS").text(2);
+            //}
+        </script>
+    </head>
+    <body>
+        @*<input type="button" onclick="change()" value="Değiştir"/>*@
+        <table class="table table-responsive">
+            @foreach (MatchData data in Model)
+            {
+                <tr>
+                    <td style="text-align:center;vertical-align:middle"><b>@data.Team1Name</b><br><image class="@data.Team1Flag"></image></td>
+                    <td style="text-align:center;vertical-align:middle"><b>@data.Team2Name</b><br><image class="@data.Team2Flag"></image></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;vertical-align:middle" id="tbl@(data.Team1Flag)"><h2><b><span id="txt@(data.Team1Flag)">@data.Team1Score</span></b></h2></td>
+                    <td style="text-align:center;vertical-align:middle" id="tbl@(data.Team2Flag)"><h2><b><span id="txt@(data.Team2Flag)">@data.Team2Score</span></b></h2></td>
+                </tr>
+            }       
+        </table>
+        @*<div>
+            <image class="spritesFB" id="fb" value="1"></image>
+            <image class="spritesGS" id="fb" value="1"></image>
+            <image class="spritesBJK" id="fb" value="1"></image>
+            <image class="spritesBRS" id="fb" value="1"></image>
+            <image class="spritesGZT" id="fb" value="1"></image>
+            <image class="spritesDNZ" id="fb" value="1"></image>
+            <image class="spritesELZ" id="fb" value="1"></image>
+            <image class="spritesGRS" id="fb" value="1"></image>
+        </div>*@
+    </body>
+</html>

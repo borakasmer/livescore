@@ -1,0 +1,70 @@
+﻿@using LiveScore.Models
+@model List<MatchData>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/flag.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        var hubProxy = $.connection.match;
+        $.connection.hub.logging = true;
+
+        $.connection.hub.start().done(function () {
+            console.log("hub.start.done");
+        }).fail(function (error) {
+            console.log(error);
+        });
+
+        function UpdateData() {
+            hubProxy.server.notifyClients(updatedFlags);
+            $('[id^=txt]').attr("isChange", false)
+              = [];
+        }
+
+        var updatedFlags = [];
+        function MarkedChangeText(id) {
+            updatedFlags = [];
+            //var i = 0;
+            $('#' + id).attr("isChange", true);
+            $('input[isChange=true]').each(function (i, obj) {
+                updatedFlags.push({ ID: obj.id, Score: obj.value, NO: $(obj).attr("no") });
+                //console.log(updatedFlags[i]);
+                //i++;
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+    <table class="table table-responsive">
+        @foreach (MatchData data in Model)
+            {
+            <tr>
+                <td style="text-align:center;vertical-align:middle"><b>@data.Team1Name</b><br><image class="@data.Team1Flag"></image></td>
+                <td style="text-align:center;vertical-align:middle"><b>@data.Team2Name</b><br><image class="@data.Team2Flag"></image></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;vertical-align:middle" id="tbl@(data.Team1Flag)"><input type="text" no="@data.ID" id="txt@(data.Team1Flag)" value="@data.Team1Score" class="form-control" onchange="MarkedChangeText('txt@(data.Team1Flag)')" /></td>
+                <td style="text-align:center;vertical-align:middle" id="tbl@(data.Team2Flag)"><input type="text" no="@data.ID" id="txt@(data.Team2Flag)" value="@data.Team2Score" class="form-control" onchange="MarkedChangeText('txt@(data.Team2Flag)')" /></td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="Gönder" class="btn btn-success" onclick="UpdateData()" />
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
